@@ -37,7 +37,6 @@ export default {
   --fj-bg-80: rgba(85, 101, 115, 1);
   --fj-bg-100: rgba(44, 62, 88, 1);
 }
-
 ::-webkit-scrollbar {
   width: 8px;
   height: 8px;
@@ -56,13 +55,13 @@ html {
   scrollbar-width: thin;
   scrollbar-color: var(--fj-bg-80) var(--fj-bg-0);
 }
-
 body {
-  background: linear-gradient(to top, var(--fj-bg-100), var(--fj-bg-0)) fixed;
+  background: linear-gradient(to bottom, var(--fj-bg-20), var(--fj-bg-100)) fixed;
   font: var(--fj-font-size) var(--fj-font), var(--fj-font-base) !important;
 }
 main {
   background-color: var(--fj-bg-0);
+  border-radius: 0.1875rem;
   margin: 0 auto;
   padding: 1.875rem 0;
   min-height: 18rem;
@@ -70,6 +69,7 @@ main {
 }
 header {
   background-color: var(--fj-bg-80);
+  border-radius: 0.1875rem;
   color: var(--fj-bg-0);
   width: 64rem;
   margin: 0 auto;
@@ -84,7 +84,11 @@ ul {
   padding: 0.3125rem 0.625rem;
 }
 .logo {
-  height: 1.875rem;
+  background-color: var(--fj-bg-0);
+  border: 0.1250rem solid var(--fj-bg-60);
+  border-radius: 50%;
+  padding: 0.1875rem;
+  height: 2rem;
   vertical-align: middle;
 }
 </style>
