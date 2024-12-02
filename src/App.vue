@@ -1,26 +1,90 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <header>
+    <nav>
+      <ul>
+        <li class="nav-item">
+          <img src="/assets/img/build-a-bot-logo.png" class="logo" alt="Logo" />
+          Build-a-Bot
+        </li>
+      </ul>
+    </nav>
+  </header>
+  <main>
+    <HomePage />
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+import HomePage from './components/HomePage.vue';
 
 export default {
   name: 'App',
   components: {
-    HelloWorld,
+    HomePage,
   },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+:root {
+  --fj-font: 'Source Code Pro';
+  --fj-font-base: monospace;
+  --fj-font-size: 0.775rem;
+  --fj-bg-0: rgba(236, 240, 241, 1);
+  --fj-bg-20: rgba(208, 219, 217, 1);
+  --fj-bg-40: rgba(167, 179, 179, 1);
+  --fj-bg-60: rgba(126, 140, 142, 1);
+  --fj-bg-80: rgba(85, 101, 115, 1);
+  --fj-bg-100: rgba(44, 62, 88, 1);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--fj-bg-0);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--fj-bg-80);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--fj-bg-100);
+}
+html {
+  scrollbar-width: thin;
+  scrollbar-color: var(--fj-bg-80) var(--fj-bg-0);
+}
+
+body {
+  background: linear-gradient(to top, var(--fj-bg-100), var(--fj-bg-0)) fixed;
+  font: var(--fj-font-size) var(--fj-font), var(--fj-font-base) !important;
+}
+main {
+  background-color: var(--fj-bg-0);
+  margin: 0 auto;
+  padding: 1.875rem 0;
+  min-height: 18rem;
+  width: 64rem;
+}
+header {
+  background-color: var(--fj-bg-80);
+  color: var(--fj-bg-0);
+  width: 64rem;
+  margin: 0 auto;
+}
+ul {
+  display: flex;
+  padding: 0.1875rem;
+}
+.nav-item {
+  border-right: 0.0625rem solid var(--fj-bg-60);
+  display: inline-block;
+  padding: 0.3125rem 0.625rem;
+}
+.logo {
+  height: 1.875rem;
+  vertical-align: middle;
 }
 </style>
