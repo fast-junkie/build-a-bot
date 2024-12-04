@@ -10,32 +10,36 @@
     </nav>
   </header>
   <main>
-    <HomePage />
+    <!--<HomePage />-->
+    <RobotBuilder />
   </main>
 </template>
 
 <script>
-import HomePage from './components/HomePage.vue';
+// import HomePage from '@/home/HomePage.vue';
+import RobotBuilder from '@/build/RobotBuilder.vue';
 
 export default {
   name: 'App',
   components: {
-    HomePage,
+    RobotBuilder,
   },
 };
 </script>
 
 <style>
 :root {
-  --fj-font: 'Source Code Pro';
-  --fj-font-base: monospace;
-  --fj-font-size: 0.775rem;
+  --fj-b-radius: 0.85rem;
   --fj-bg-0: rgba(236, 240, 241, 1);
   --fj-bg-20: rgba(208, 219, 217, 1);
   --fj-bg-40: rgba(167, 179, 179, 1);
   --fj-bg-60: rgba(126, 140, 142, 1);
   --fj-bg-80: rgba(85, 101, 115, 1);
   --fj-bg-100: rgba(44, 62, 88, 1);
+  --fj-red: rgba(231, 76, 60, 1);
+  --fj-font: 'Source Code Pro';
+  --fj-font-base: monospace;
+  --fj-font-size: 0.775rem;
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -61,15 +65,19 @@ body {
 }
 main {
   background-color: var(--fj-bg-0);
-  border-radius: 0.1875rem;
+  border-radius: var(--fj-b-radius);
   margin: 0 auto;
   padding: 1.875rem 0;
   min-height: 18rem;
   width: 64rem;
 }
+
+</style>
+
+<style scoped>
 header {
   background-color: var(--fj-bg-80);
-  border-radius: 0.1875rem;
+  border-radius: var(--fj-b-radius);
   color: var(--fj-bg-0);
   width: 64rem;
   margin: 0 auto;
