@@ -3,31 +3,41 @@
     <nav>
       <ul>
         <li class="nav-item">
-          <img src="/assets/img/build-a-bot-logo.png" class="logo" alt="Logo" />
-          Build-a-Bot
+          <router-link :to="{ name: 'Home' }">
+            <img src="/assets/img/build-a-bot-logo.png" class="logo" alt="Logo" />
+            Build-a-Bot
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'Build' }">
+            Build
+          </router-link>
+        </li>
+        <li class="nav-item">
+          <router-link class="nav-link" :to="{ name: 'PartsBrowse' }">
+            Browse
+          </router-link>
         </li>
       </ul>
     </nav>
   </header>
-  <main>
-    <!--<HomePage />-->
-    <RobotBuilder />
-  </main>
+  <div class="container">
+    <aside class="aside">
+      <router-view name="sidebar" />
+    </aside>
+    <main>
+      <router-view />
+    </main>
+  </div>
 </template>
 
 <script>
-// import HomePage from '@/home/HomePage.vue';
-import RobotBuilder from '@/build/RobotBuilder.vue';
-
 export default {
   name: 'App',
-  components: {
-    RobotBuilder,
-  },
 };
 </script>
 
-<style>
+<style lang="scss">
 :root {
   --fj-b-radius: 0.85rem;
   --fj-bg-0: rgba(236, 240, 241, 1);
@@ -40,6 +50,7 @@ export default {
   --fj-font: 'Source Code Pro';
   --fj-font-base: monospace;
   --fj-font-size: 0.775rem;
+  --fj-link: rgba(0, 52, 219, 1);
 }
 ::-webkit-scrollbar {
   width: 8px;
@@ -63,18 +74,31 @@ body {
   background: linear-gradient(to bottom, var(--fj-bg-20), var(--fj-bg-100)) fixed;
   font: var(--fj-font-size) var(--fj-font), var(--fj-font-base) !important;
 }
-main {
-  background-color: var(--fj-bg-0);
-  border-radius: var(--fj-b-radius);
-  margin: 0 auto;
-  padding: 1.875rem 0;
-  min-height: 18rem;
-  width: 64rem;
-}
 
+.container {
+  display: flex;
+  margin: 0.625rem auto 0 auto;
+  justify-content: center;
+  main {
+    background-color: var(--fj-bg-0);
+    border-top-right-radius: var(--fj-b-radius);
+    border-bottom-right-radius: var(--fj-b-radius);
+    padding: 1.875rem 0;
+    min-height: 18rem;
+    width: 57.75rem;
+  }
+  aside {
+    background-color: var(--fj-bg-80);
+    border-top-left-radius: var(--fj-b-radius);
+    border-bottom-left-radius: var(--fj-b-radius);
+    padding: 1.875rem 0;
+    min-height: 18rem;
+    width: 6.25rem;
+  }
+}
 </style>
 
-<style scoped>
+<style lang="scss" scoped>
 header {
   background-color: var(--fj-bg-80);
   border-radius: var(--fj-b-radius);
@@ -88,8 +112,21 @@ ul {
 }
 .nav-item {
   border-right: 0.0625rem solid var(--fj-bg-60);
-  display: inline-block;
+  display: flex;
   padding: 0.3125rem 0.625rem;
+  align-items: center;
+  a {
+    color: var(--fj-bg-0);
+    text-decoration: none;
+    &.nav-link {
+      margin-bottom: 0.1825rem;
+    }
+    &.router-link-active {
+      font: {
+        weight: bold;
+      }
+    }
+  }
 }
 .logo {
   background-color: var(--fj-bg-0);

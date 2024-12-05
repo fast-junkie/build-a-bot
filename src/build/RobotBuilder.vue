@@ -76,6 +76,15 @@ import CollapseControl from '@/shared/CollapseControl.vue';
 
 export default {
   name: 'RobotBuilder',
+  beforeRouteLeave(to, from, next) {
+    if (this.addedToCart) {
+      next(true);
+    } else {
+      // eslint-disable-next-line no-alert
+      const response = window.confirm('Are you sure you want to leave?');
+      next(response);
+    }
+  },
   components: {
     PartSelector,
     CollapseControl,
@@ -85,6 +94,7 @@ export default {
   data() {
     return {
       availableParts,
+      addedToCart: false,
       cart: [],
       selectedRobot: {
         head: {},
@@ -104,6 +114,7 @@ export default {
         + robot.armRight.cost
         + robot.base.cost;
       this.cart.push({ ...robot, cost });
+      this.addedToCart = true;
     },
   },
 };

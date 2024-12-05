@@ -2,7 +2,9 @@
   <div :class="position" class="part">
     <img :src="selectedPart.src"
          :title="selectedPart.title"
-         :alt="selectedPart.title" />
+         :alt="selectedPart.title"
+         @click="showPartInfo()"
+         @keydown.enter="showPartInfo()" />
     <button @click="selectPrevPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
     <span class="sale" v-show="selectedPart.onSale">Sale!</span>
@@ -57,6 +59,16 @@ export default {
         this.parts.length,
       );
     },
+    showPartInfo() {
+      this.$router
+        .push({
+          name: 'Parts',
+          params: {
+            partType: this.selectedPart.type,
+            id: this.selectedPart.id,
+          },
+        });
+    },
   },
 };
 </script>
@@ -68,6 +80,7 @@ export default {
   position: relative;
   width: 10.3125rem;
   img {
+    cursor: pointer;
     width: 10.3125rem;
   }
   .sale {
