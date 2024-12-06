@@ -3,7 +3,7 @@
     <h2>Heads</h2>
     The head is where the brain of your robot will reside. Heads have
     different capabilities so be sure to choose the one that fits your needs.
-    <div v-for="(head, idx) in heads" :key="idx" class="container">
+    <div v-for="(head, idx) in parts.heads" :key="idx" class="container">
       <img :src="head.src" :alt="head.title" />
       <div class="text">
         <h4>{{head.title}}</h4>
@@ -14,13 +14,11 @@
 </template>
 
 <script>
-import parts from '@/data/parts';
+import getPartsMixin from '@/parts/get-parts-mixin';
 
 export default {
   name: 'RobotHeads',
-  data() {
-    return { heads: parts.heads };
-  },
+  mixins: [getPartsMixin],
 };
 </script>
 

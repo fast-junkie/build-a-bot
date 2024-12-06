@@ -4,7 +4,7 @@
     The Base is critical to the mobility of your robot. Be
     sure to choose a base that will work well with the terrain
     where your robot needs to operate.
-    <div v-for="(base, idx) in bases" :key="idx" class="container">
+    <div v-for="(base, idx) in parts.bases" :key="idx" class="container">
       <img :src="base.src" :alt="base.title" />
       <div class="text">
         <h4>{{base.title}}</h4>
@@ -15,13 +15,11 @@
 </template>
 
 <script>
-import parts from '@/data/parts';
+import getPartsMixin from '@/parts/get-parts-mixin';
 
 export default {
   name: 'RobotBases',
-  data() {
-    return { bases: parts.bases };
-  },
+  mixins: [getPartsMixin],
 };
 </script>
 

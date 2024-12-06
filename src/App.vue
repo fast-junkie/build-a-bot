@@ -18,6 +18,12 @@
             Browse
           </router-link>
         </li>
+        <li class="nav-item cart">
+          <router-link class="nav-link" :to="{ name: 'Cart' }">
+            <span role="img" aria-label="cart">🛒</span> Cart
+            <span v-if="cart.length" class="cart-items">{{ cart.length }}</span>
+          </router-link>
+        </li>
       </ul>
     </nav>
   </header>
@@ -34,6 +40,11 @@
 <script>
 export default {
   name: 'App',
+  computed: {
+    cart() {
+      return this.$store.state.robots.cart;
+    },
+  },
 };
 </script>
 
@@ -135,5 +146,22 @@ ul {
   padding: 0.1875rem;
   height: 2rem;
   vertical-align: middle;
+}
+.cart {
+  border: none;
+  margin-left: auto;
+  .nav-link {
+    position: relative;
+    .cart-items {
+      display: inline-block;
+      position: absolute;
+      top: -0.3125rem;
+      left: -0.5625rem;
+      width: 1rem;
+      text-align: center;
+      border-radius: 50%;
+      background-color: var(--fj-red);
+    }
+  }
 }
 </style>

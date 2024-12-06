@@ -1,5 +1,5 @@
 <template>
-  <section class="content">
+  <section v-if="availableParts" class="content">
     <div id="partInfo" class="part-info"></div>
     <div class="preview">
       <CollapseControl>
@@ -17,7 +17,9 @@
           </div>
         </div>
       </CollapseControl>
-      <button class="add-to-cart" @click="addToCart()" title="Click to add to cart.">🛒 Add</button>
+      <button class="add-to-cart" @click="addToCart()" title="Click to add to cart.">
+        <span role="img" aria-label="cart">🛒</span> Add
+      </button>
     </div>
     <div class="top-row">
       <!--<div class="robot-name">
@@ -49,33 +51,18 @@
         :parts="availableParts.bases"
         @partSelected="(p) => selectedRobot.base = p" />
     </div>
-    <div>
-      <table>
-        <caption>Cart</caption>
-        <thead>
-          <tr>
-            <th>Robot</th>
-            <th class="cost">Cost</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="(robot, index) in cart" :key="index">
-            <td>{{ robot.head.title }}</td>
-            <td class="cost">{{ robot.cost }}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
   </section>
 </template>
 
 <script>
-import availableParts from '@/data/parts';
 import PartSelector from '@/build/PartSelector.vue';
 import CollapseControl from '@/shared/CollapseControl.vue';
 
 export default {
   name: 'RobotBuilder',
+  created() {
+    this.$store.dispatch('robots/getParts');
+  },
   beforeRouteLeave(to, from, next) {
     if (this.addedToCart) {
       next(true);
@@ -90,10 +77,12 @@ export default {
     CollapseControl,
   },
   computed: {
+    availableParts() {
+      return this.$store.state.robots.parts;
+    },
   },
   data() {
     return {
-      availableParts,
       addedToCart: false,
       cart: [],
       selectedRobot: {
@@ -113,8 +102,11 @@ export default {
         + robot.torso.cost
         + robot.armRight.cost
         + robot.base.cost;
-      this.cart.push({ ...robot, cost });
-      this.addedToCart = true;
+      this.$store.dispatch('robots/addRobotToCart', { ...robot, cost })
+        .then(() => {
+          this.addedToCart = true;
+          this.$router.push('/cart');
+        });
     },
   },
 };
@@ -143,18 +135,6 @@ export default {
 }
 .content {
   position: relative;
-}
-
-caption {
-  font-size: 1rem;
-  font-weight: bold;
-}
-caption, th, td {
-  padding: 0.3125rem;
-  text-align: left;
-}
-th.cost, td.cost {
-  text-align: right;
 }
 
 /* Module o4 additions to base... */
