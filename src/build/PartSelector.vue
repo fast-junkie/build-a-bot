@@ -7,15 +7,20 @@
          @keydown.enter="showPartInfo()" />
     <button @click="selectPrevPart()" class="prev-selector"></button>
     <button @click="selectNextPart()" class="next-selector"></button>
-    <span class="sale" v-show="selectedPart.onSale">Sale!</span>
+    <span v-pin:position.bottom.right class="sale" v-show="selectedPart.onSale">Sale!</span>
   </div>
 </template>
 
 <script>
+import pinDirective from '@/shared/pin-directive';
+
 const getNextIndex = (currentIndex, length) => (currentIndex + 1) % length;
 const getPrevIndex = (currentIndex, length) => (currentIndex - 1 + length) % length;
 
 export default {
+  directives: {
+    pin: pinDirective,
+  },
   props: {
     parts: {
       type: Array,
@@ -88,9 +93,9 @@ export default {
     border-radius: 0.1875rem;
     color: var(--fj-bg-0);
     padding: 0.1875rem;
-    position: absolute;
-    bottom: 0.3125rem;
-    right: 0.3125rem;
+    // position: absolute;
+    // bottom: 0.3125rem;
+    // right: 0.3125rem;
   }
 }
 .prev-selector, .next-selector {
